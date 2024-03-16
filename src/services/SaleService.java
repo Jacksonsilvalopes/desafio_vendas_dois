@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class SaleService {
 
     private List<Sale> saleList;
+
     private class SellerTotal {
         private String seller;
         private Double total;
@@ -16,15 +17,6 @@ public class SaleService {
             this.seller = seller;
             this.total = total;
         }
-
-        public String getSeller() {
-            return seller;
-        }
-
-        public Double getTotal() {
-            return total;
-        }
-
         @Override
         public String toString() {
             String totalValue = String.format("%.2f", total);
@@ -39,7 +31,7 @@ public class SaleService {
     public void add(Sale sale) {
         saleList.add(sale);
     }
-    public Set<String> getName() {
+    private Set<String> getName() {
         return saleList.stream().map(x -> x.getSeller()).collect(Collectors.toSet());
     }
     public void summary() {
@@ -55,7 +47,7 @@ public class SaleService {
         sellerTotal.forEach(System.out::println);
     }
 
-    public double total(String x) {
+    private double total(String x) {
         return saleList.stream()
                 .filter(s -> s.getSeller().equals(x))
                 .map(s -> s.getTotal())
